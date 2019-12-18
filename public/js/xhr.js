@@ -1,31 +1,33 @@
-const request = (method, url) => {
+const ROOT_URL = 'http://jsonplaceholder.typicode.com/posts';
+
+const requestPosts = (method, url) => {
+  // use the constructor
+
   const xhr = new XMLHttpRequest();
 
-  // initializes the request
+  // Initializing the request, async is true
   xhr.open(method, url, true);
 
-  // sends the request
+  // Send the request
   xhr.send();
 
-  xhr.onreadystatechange = function() {
-    console.log('Ready State:', this.readyState);
-  };
+  // handle the response
 
   xhr.addEventListener('load', function(evt) {
     console.log('status:', this.status);
-    console.log('statusText:', this.statusText);
 
     if (this.status >= 200 && this.status < 300) {
+      // success
       console.log(this.response);
     } else {
-      console.log(`Error: ${this.status}`);
+      // problem
+      console.log(this.status, 'Error with the request');
     }
   });
 
-  xhr.addEventListener('error', evt => {
-    console.log(`Error, could not complete the request`);
-  });
+  xhr.onreadystatechange = function() {
+    console.log(this.readyState);
+  };
 };
 
-const url = 'http://jsonplaceholder.typicode.com/posts';
-request('GET', url);
+requestPosts('GET', ROOT_URL);

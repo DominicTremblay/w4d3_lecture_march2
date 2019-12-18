@@ -1,17 +1,19 @@
 const ROOT_URL = 'http://jsonplaceholder.typicode.com/posts';
 
 const createArticle = articleObj => {
+  // create the HTML for one article object
+
   //   <div class="post-preview" data-article-id="">
   //   <a href="#">
   //     <h2 class="post-title"></h2>
   //     <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
   //   </a>
   //   <p class="post-meta">
-  //     content
-  //     Posted by <a href="#">Start Bootstrap</a> on September 24, 2014
+  //    content
+  //     content Posted by <a href="#">Start Bootstrap</a> on September 24, 2019
   //   </p>
-  // </div>
   // <hr />
+  // </div>
 
   const $postDiv = $('<div>')
     .addClass('post-preview')
@@ -23,10 +25,9 @@ const createArticle = articleObj => {
     .addClass('post-title')
     .text(articleObj.title)
     .appendTo($link);
-
   $('<h3>')
     .addClass('post-subtitle')
-    .text('This would be the sub-title if we had one')
+    .text('This would be the subtitle if we had one')
     .appendTo($link);
 
   const $content = $('<p>')
@@ -34,42 +35,55 @@ const createArticle = articleObj => {
     .text(articleObj.body);
 
   $('<p>')
-    .html('Posted by <a href="#">Start Bootstrap</a> on September 24, 2014')
+    .html(
+      'content Posted by <a href="#">Start Bootstrap</a> on September 24, 2019',
+    )
     .appendTo($content);
 
-  $postDiv.append($link, $content);
-
+  $postDiv.append($link);
+  $postDiv.append($content);
   $('<hr>').appendTo($postDiv);
 
   return $postDiv;
 };
 
 const renderArticles = articlesArr => {
-  $.each(articlesArr, (index, article) => {
-    $('#articles').append(createArticle(article));
+  // jQuery for loop
+  $.each(articlesArr, function(index, articleObj) {
+    $('#articles').append(createArticle(articleObj));
   });
 };
 
-const requestPosts = (method, url, cb) => {
+const requestPosts = (method, url) => {
+  // issue the request with jQuery Ajax
+
   $.ajax({
     method,
     url,
   })
-    .done(result => {
-      cb(result);
+    .done(function(result) {
+      // Success. Getting the result from the request
+
+      renderArticles(result);
     })
-    .fail(error => console.log(`Error with the request: ${error}`))
-    .always(() => console.log(`Request completed.`));
+    .fail(function(error) {
+      // Problem with the request
+      console.log(`Error with the request: ${error.message}`);
+    })
+    .always(function() {
+      // This will always run
+      console.log('request completed');
+    });
 };
 
-// document ready
-$(() => {
-  // issue a request, callback to renderArticles
-  requestPosts('GET', ROOT_URL, renderArticles);
-  // define the onClick event handler on the #load-more button
+$(document).ready(function() {
+  requestPosts('GET', ROOT_URL);
 
-  $('#load-more').on('click', event => {
+  // event listener for click on the link with an id of load-more
+  $('#load-more').on('click', function(event) {
+    // defaut the default behavior of the link
     event.preventDefault();
-    requestPosts('GET', ROOT_URL, renderArticles);
+
+    requestPosts('GET', ROOT_URL);
   });
-}); // end of document ready
+});
