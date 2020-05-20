@@ -47,3 +47,25 @@ h1.display-4 {
   justify-content: center;
   border: 1px solid mediumaquamarine;
 }
+
+img.mr-3 {
+  width: 7em;
+}
+
+main container section {
+  display: flex;
+  justify-content: center;
+}
+
+li.media {
+  display: flex;
+}
+
+li.media img {
+  padding: 1rem;
+
+}
+
+#search-results {
+  width: 70%;
+}
