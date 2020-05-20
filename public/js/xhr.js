@@ -4,6 +4,7 @@ const requestPosts = (method, url) => {
   // use the constructor
   const xhr = new XMLHttpRequest();
 
+
   // Initializing the request, async is true
   xhr.open(method, url, true);
 
@@ -11,19 +12,22 @@ const requestPosts = (method, url) => {
   xhr.send();
 
   // handle the response
-  xhr.addEventListener('load', function (event) {
 
-    if (this.status >= 200 && this.status < 300) {
-      console.log(this.response);
-    } else {
-      console.log('Error with the request:', this.status);
-    }
 
-  });
+    xhr.addEventListener('load', function(event) {
 
-  xhr.onreadystatechange = function(event) {
-    console.log('State:', this.readyState)
-  }
+      if(this.status >= 200 && this.status < 300) {
+        // success
+        console.log(this.response);
+        // build some HTML elements out of the response.
+      } else {
+        // error
+        console.log('Error', this.status);
+
+      }
+
+
+    });
 };
 
 requestPosts('GET', ROOT_URL);

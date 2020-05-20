@@ -1,5 +1,7 @@
 # W4D3 Lecture - AJAX
 
+- Ajax
+
 ## What is AJAX
 
 - Microsoft added a little-known function call named XMLHttpRequest to IE5
