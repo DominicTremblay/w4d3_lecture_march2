@@ -1,11 +1,20 @@
 $(document).ready(function () {
-  //   <li class="media">
-  //   <img src="..." class="mr-3" alt="...">
-  //   <div class="media-body">
-  //     <h5 class="mt-0 mb-1">List-based media object</h5>
-  //     Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-  //   </div>
-  // </li>
+/* <li class="media">
+<img class="align-self-start mr-3"
+  src="http://static.tvmaze.com/uploads/images/medium_portrait/246/616301.jpg" alt="Upload">
+<div class="media-body">
+  <h5 class="mt-0 mb-1">Upload <span class="badge badge-pill badge-info">Comedy</span><span
+      class="badge badge-pill badge-info">Science-Fiction</span><span
+      class="badge badge-pill badge-info">Mystery</span><span
+      class="badge badge-pill badge-secondary"></span></h5>
+  <ul class="list-group">
+    <li class="list-group-item">Premiered: 2020-05-01</li>
+    <li class="list-group-item">Rating: 8.4</li>
+    <li class="list-group-item">Runtime: 30</li>
+  </ul>
+</div>
+</li> */
+
 
   const createMediaEl = (showObj) => {
     console.log(showObj);
@@ -40,7 +49,7 @@ $(document).ready(function () {
       .appendTo($list);
     $('<li>')
       .addClass('list-group-item')
-      .text(`Rating: ${showObj.show.rating.average}`)
+      .text(`Rating: ${showObj.show.rating.average || 'n/a'}`)
       .appendTo($list);
     $('<li>')
       .addClass('list-group-item')
